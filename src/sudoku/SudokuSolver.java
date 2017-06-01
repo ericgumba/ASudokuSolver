@@ -11,44 +11,7 @@ import java.util.StringTokenizer;
  */
 public class SudokuSolver {
 
-  static BufferedReader reader;
-
-  private StringTokenizer token;
-
-
-  List<ArrayList<Integer>> list = new ArrayList<ArrayList<Integer>>();
-
-  private ArrayList<ArrayList<ArrayList<Integer>>> candidateSolutions;
-
-  public int[][] Algorithm(BufferedReader sudokuReader) throws IOException{
-
-    int board[][] = new int[9][9];
-      try {
-        String text = null;
-        String token;
-        int i = 0;
-        int j = 0;
-        while (( text = reader.readLine()) != null) {
-
-          this.token = new StringTokenizer(text);
-          while (this.token.hasMoreTokens()) {
-            if (!(token = this.token.nextToken()).equals(" ")) {
-              board[i][j] = Integer.parseInt(token);
-              j++;
-            }
-          }
-          i++;
-          j = 0;
-        }
-      } catch (Exception e){
-        System.out.println(" -_- ");
-      }
-      return board;
-  }
-
-
-  //input, number to be checked, row and column of the square
-  // being examined
+  public static int[][] solvedBoard = new int[9][9];
   public boolean potentialCandidate(int[][] board, int candidate, int row, int column){
 
     if ( row <= 2 && column <= 2 ){
@@ -141,10 +104,7 @@ public class SudokuSolver {
 
   public void solved(int[][] board, int row, int column){
 
-    // check to see if the square already has a number
-
-
-    boolean noMore = false;
+    boolean noMore;
 
       while (board[row][column] != 0 && (column != 8 || row != 8)) {
         if (column < 8) {
@@ -186,10 +146,9 @@ public class SudokuSolver {
       System.out.println("\n \n ROW " + (i+1));
       for (int j = 0; j < board.length; j++){
         System.out.print(board[i][j] + " ");
+        solvedBoard[i][j] = board[i][j];
       }
     }
-
-    System.out.println("\n\n ");
 
   }
 

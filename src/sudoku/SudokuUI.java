@@ -14,6 +14,7 @@ public class SudokuUI extends JFrame implements ActionListener {
   private String currentEntry = "";
   private JTextField[][] squares = new JTextField[9][9];
 
+  static int board[][] = new int[9][9];
   private JPanel p[][]= new JPanel [3][3];
 
 
@@ -64,7 +65,6 @@ public class SudokuUI extends JFrame implements ActionListener {
   public void actionPerformed(ActionEvent e) {
     final SudokuSolver SOLVE = new SudokuSolver();
 
-    int board[][] = new int[9][9];
     for(int x = 0; x <= 8; x++){
       for(int y = 0; y <= 8; y++){
         if ( squares[x][y].getText().equals(" ") ) {
@@ -84,6 +84,7 @@ public class SudokuUI extends JFrame implements ActionListener {
 
     SOLVE.solve(board);
 
+    board = SudokuSolver.solvedBoard;
 
 //
     for (int i = 0; i <= 8; i++){
